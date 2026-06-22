@@ -38,3 +38,6 @@ coverage*.xml
 # OS
 Thumbs.db
 .DS_Store
+
+# Scratch / temp
+tmp/
