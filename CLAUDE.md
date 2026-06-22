@@ -41,9 +41,9 @@
 1. 建分支       git checkout -b feature/issue-N-描述
 2. 编码         遵守 doc/005-CODING_STANDARD.md
 3. 本地测试     dotnet test（对应 doc/004-TEST_PLAN.md 的用例）
-4. 提 PR        关联 Issue（Closes #N），写清做了什么、为什么
+4. 提 PR        关联 Issue（Closes #N），写清做了什么、为什么（见 teaching/005）
 5. CI 验证      GitHub Actions 自动编译+测试（.github/workflows/build-test.yml）
-6. 自审         切换"审查者"视角，对照设计和 Issue（见 teaching/006）
+6. 自审         切换"审查者"视角，对照设计和 Issue（见 teaching/007）
 7. 合并         CI 通过 + 自审通过 → 合并 → 关闭 Issue
 ```
 
