@@ -31,14 +31,15 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      # 5. 运行测试
-      #    SQLite 跨平台、无需额外驱动，单元测试与 Repository 测试均可在
-      #    CI runner 上原生运行。仅过滤掉需要端到端组装的测试（Integration/E2E）。
-      - name: Test (unit + repository)
-        run: dotnet test --configuration Release --no-build --filter "Category!=Integration&Category!=E2E"
+      # 5. 运行测试（全部）
+      #    本项目的测试全程进程内：单元（NSubstitute Mock）、Repository（临时 SQLite）、
+      #    端到端（真实 Service + Fake + SQLite，不启动 WinForms 界面）。
+      #    都不依赖真实硬件或显示设备，可在 CI runner 上原生跑通，因此不做筛选。
+      - name: Test
+        run: dotnet test --configuration Release --no-build
 
 # 说明：
 # - 单元测试（PickupService，用 NSubstitute Mock 依赖）→ CI 可跑
 # - Repository 测试（SQLite 临时库，无需额外驱动）→ CI 可跑
-# - 集成 / 端到端测试（需启动整套 Fake + 界面）→ 标记 Integration / E2E，CI 跳过，本地跑
-# 这样 CI 保证"编译通过 + 核心业务逻辑与数据访问测试通过"，作为合并的最低门槛。
+# - 端到端测试（进程内组装 Service + Fake + SQLite，无界面）→ CI 可跑
+# 这样 CI 保证"编译通过 + 全部测试通过"，作为合并的最低门槛。

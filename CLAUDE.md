@@ -92,4 +92,4 @@
 
 - Shell：Windows，PowerShell 主用；Bash 工具处理中文路径/文件名更稳（PowerShell 传中文易乱码）。
 - GitHub 连接偶尔超时，push 失败时重试即可。
-- 测试注意：SQLite 跨平台、无需额外驱动，数据库测试在 CI runner 上可原生运行。端到端测试（启动整套 Fake + 界面）若不适合在 CI 跑，可用 `[Trait("Category","E2E")]` 标记区分，CI 跑单元 + Repository 测试，本地跑全部。
+- 测试注意：SQLite 跨平台、无需额外驱动，数据库测试在 CI runner 上可原生运行。本项目端到端测试是**无界面**的（进程内组装 Service + Fake + SQLite，不启动 WinForms），同样能在 CI 上跑通，故 CI 运行全部测试。若将来新增需启动界面或真实硬件的测试，可用 `[Trait("Category","E2E")]` / `[Trait("Category","Integration")]` 标记，并在 workflow 里用 `--filter` 排除。
