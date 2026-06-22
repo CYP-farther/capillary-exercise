@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 本文件供 Claude Code 自动读取，是本项目的**稳定工作规约**（配置、约束、流程规范）。
-当前进度、下一步等动态信息见 `handoff/` 目录。
+当前进度见下方「当前进度」一节。
 
 ---
 
@@ -30,7 +30,6 @@
 | `doc/004-TEST_PLAN.md` | 测试计划（测试用例 TC-01~23） |
 | `doc/005-CODING_STANDARD.md` | 代码规范（10 条核心） |
 | `doc/teaching/` | 配套教学材料（理念讲解，开发时可不读） |
-| `handoff/` | **会话交接文档（当前进度、下一步）—— 接手工作先读这里** |
 
 ---
 
@@ -48,7 +47,20 @@
 7. 合并         CI 通过 + 自审通过 → 合并 → 关闭 Issue
 ```
 
-> 当前进行到哪个 Issue、下一步做什么，见 `handoff/`。
+---
+
+## 当前进度
+
+本期「领料流程」范围的 8 个 Issue（#1-#4、#7-#10）**已全部完成并合并到 `main`**：
+
+- #1 项目基础结构、#2 数据访问层（DbHelper + Repository）
+- #3 硬件接口、#4 三个进程内 Fake
+- #7 PickupService（领料编排 + 异常处理）、#8 PickupForm（界面 + 进度）
+- #9 端到端测试、#10 GitHub Actions CI
+
+CI（`.github/workflows/build-test.yml`）在每次 push / PR 到 `main` 时编译（Release）并运行全部 36 个测试（单元 + Repository + 无界面 E2E）。
+
+> 本期无后续 Issue。如开启新一期（存料 / 退料流程），先更新 `doc/001-REQUIREMENTS.md` 与 `doc/003-ISSUE_LIST.md`，再按上方流程逐个开发。
 
 ---
 
