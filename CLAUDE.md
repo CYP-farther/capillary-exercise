@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-本文件供 Claude Code 自动读取，是本项目的工作指引。**开始任何编码前请先读完。**
+本文件供 Claude Code 自动读取，是本项目的**稳定工作规约**（配置、约束、流程规范）。
+当前进度、下一步等动态信息见 `handoff/` 目录。
 
 ---
 
@@ -8,35 +9,34 @@
 
 `capillary-exercise` 是一个**流程驱动开发的练习项目**，以"劈刀（Capillary）自动存取管理系统"为案例，完整走一遍软件工程闭环：
 
-> 需求 → 设计 → Issue 拆解 → 测试计划 → 代码规范/CI → **迭代开发**
+> 需求 → 设计 → Issue 拆解 → 测试计划 → 代码规范/CI → 迭代开发
 
 **本期范围**：只做**领料流程（Pickup Flow）**。存料、退料不在本期。
 
 目的是体验"动手前先想清楚"的工程习惯，并演示 AI 如何在规范流程中协作。
 
+起点素材在 `ref/劈刀发料机-参考设计文档.md`。
+
 ---
 
-## 当前进度
+## 文档导航
 
-**前期准备（第1-6步）已全部完成**，文档在 `doc/`：
-
-| 文档 | 内容 |
+| 路径 | 内容 |
 |------|------|
 | `doc/000-PROJECT_STARTUP.md` | 项目启动全流程记录 |
-| `doc/001-REQUIREMENTS.md` | 需求（13 条功能需求 FR-01~13 + 验收标准） |
+| `doc/001-REQUIREMENTS.md` | 需求（功能需求 FR-01~13 + 验收标准） |
 | `doc/002-DESIGN.md` | 概要设计（架构、接口、流程、依赖注入） |
-| `doc/003-ISSUE_LIST.md` | Issue 拆解清单（13 个，依赖关系） |
-| `doc/004-TEST_PLAN.md` | 测试计划（23 个测试用例 TC-01~23） |
+| `doc/003-ISSUE_LIST.md` | Issue 拆解清单（13 个，含依赖关系与开发顺序） |
+| `doc/004-TEST_PLAN.md` | 测试计划（测试用例 TC-01~23） |
 | `doc/005-CODING_STANDARD.md` | 代码规范（10 条核心） |
 | `doc/teaching/` | 配套教学材料（理念讲解，开发时可不读） |
-
-**接下来是第7步：迭代开发**——把领料流程的代码真正写出来。代码尚未开始，`src/` 和 `test/` 还是空的。
+| `handoff/` | **会话交接文档（当前进度、下一步）—— 接手工作先读这里** |
 
 ---
 
-## 第7步怎么做：迭代开发流程
+## 迭代开发流程
 
-按 `doc/003-ISSUE_LIST.md` 的顺序，**一个 Issue 一个 Issue 地做**。每个 Issue 走完整闭环：
+按 `doc/003-ISSUE_LIST.md` 的顺序与依赖关系，**一个 Issue 一个 Issue 地做**。每个 Issue 走完整闭环：
 
 ```
 1. 建分支       git checkout -b feature/issue-N-描述
@@ -48,16 +48,7 @@
 7. 合并         CI 通过 + 自审通过 → 合并 → 关闭 Issue
 ```
 
-### 开发顺序（依赖关系，见 003-ISSUE_LIST.md）
-```
-第一批：#1 项目结构、#2 数据访问、#3 硬件接口
-第二批：#11 MockPLC、#12 MockScanner、#13 MockMES
-第三批：#4 TcpPlcClient、#5 TcpScannerClient、#6 HttpMesClient
-第四批：#7 PickupService
-第五批：#8 PickupForm
-第六批：#9 集成测试、#10 CI
-```
-建议从 **Issue #1** 开始。
+> 当前进行到哪个 Issue、下一步做什么，见 `handoff/`。
 
 ---
 
