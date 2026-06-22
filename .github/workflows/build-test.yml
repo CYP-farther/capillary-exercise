@@ -1,0 +1,46 @@
+name: Build and Test
+
+# 触发条件：推送到 main、或针对 main 的 PR
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    # 项目是 WinForms + x86 + Jet OLEDB，必须用 Windows runner
+    runs-on: windows-latest
+
+    steps:
+      # 1. 拉取代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. 安装 .NET 9 SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # 3. 还原依赖
+      - name: Restore
+        run: dotnet restore
+
+      # 4. 编译（Release 配置）
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      # 5. 运行测试
+      #    注意：依赖 Jet OLEDB 的数据库测试在 CI runner 上无法运行
+      #    （runner 没有 32 位 Jet 驱动）。这里只跑不依赖数据库的单元测试，
+      #    通过 Category 过滤掉需要真实数据库/硬件的测试。
+      #    测试代码里用 [Trait("Category", "RequiresDatabase")] 等标记区分。
+      - name: Test (unit, no external deps)
+        run: dotnet test --configuration Release --no-build --filter "Category!=RequiresDatabase&Category!=Integration&Category!=E2E"
+
+# 说明：
+# - 单元测试（PickupService，用 NSubstitute Mock 依赖）→ CI 可跑
+# - Repository 测试（需 Jet 驱动）→ 标记 RequiresDatabase，CI 跳过，本地跑
+# - 集成 / 端到端测试（需启动 Mock 程序）→ 标记 Integration / E2E，CI 跳过，本地跑
+# 这样 CI 保证"编译通过 + 核心业务逻辑测试通过"，作为合并的最低门槛。
