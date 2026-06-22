@@ -1,5 +1,7 @@
 # Issue 拆解清单
 
+> ✅ **本期已完成**：领料流程范围内 8 个 Issue（#1-#4、#7-#10）全部实现、测试、合并到 `main`，对应 GitHub Issue 均已关闭。CI 在每次 push / PR 时编译并运行全部 36 个测试。详见 `CLAUDE.md` 的「当前进度」一节。
+
 基于 `002-DESIGN.md`，将领料流程拆解为可独立开发的 GitHub Issues。
 
 > **设计演进（聚焦教学）**：原计划用 3 个独立 Mock 程序（TCP/HTTP，原 #11-#13）+ 3 个 TCP/HTTP 客户端（原 #4-#6）。为聚焦工程流程、去掉系统管线的复杂度，改为 **3 个进程内 Fake**（`FakePlcController`/`FakeScanner`/`FakeMesService`），合并为单个 Issue #4；原 #5/#6/#11/#12/#13 关闭。数据库也由 Access/Jet 改为 SQLite（去掉 x86 锁）。
@@ -80,11 +82,11 @@
 ## 验收标准汇总
 
 每个 Issue 完成时：
-- [ ] 功能实现符合设计文档
-- [ ] 单元测试覆盖核心逻辑
-- [ ] 代码遵守规范（待定义 `004-CODING_STANDARD.md`）
-- [ ] 通过 CI 编译和测试
-- [ ] PR 经过 Code Review（自审）
+- [x] 功能实现符合设计文档
+- [x] 单元测试覆盖核心逻辑
+- [x] 代码遵守规范（`005-CODING_STANDARD.md`）
+- [x] 通过 CI 编译和测试
+- [x] PR 经过 Code Review（自审）
 
 ---
 
