@@ -52,6 +52,18 @@ capillary-exercise/
 
 本项目基于 [002-XinJi_AI_Demo](https://github.com/Luoyuetong/002-XinJi_AI_Demo) 的 `doc/design.md` 提炼需求，但从零实现。
 
+## 版本历史
+
+| 版本 | 日期 | 里程碑 |
+|------|------|--------|
+| v0.1 | 2026-06-21 | 项目初始化，需求文档、目录结构 |
+| v0.2 | 2026-06-22 | 硬件/MES 接口定义 + 数据访问层 |
+| v0.3 | 2026-06-23 | 进程内 Fakes（PLC/Scanner/MES） |
+| v0.4 | 2026-06-24 | PickupService 领料流程编排 |
+| v0.5 | 2026-06-25 | PickupForm 界面 + 进度追踪 |
+| v0.6 | 2026-06-26 | E2E 测试 + CI 流水线 |
+| v0.7 | 2026-07-03 | 迁移至 CYP-farther/capillary-exercise |
+
 ## 开发日志
 
 - 2026-06-21: 初始化仓库，建立目录结构，完成需求文档
